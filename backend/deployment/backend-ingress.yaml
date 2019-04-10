@@ -4,8 +4,6 @@ metadata:
   name: backend
   labels:
     app: backend
-  annotations:
-    ingress.kubernetes.io/enable-cors: "true"
 spec:
   rules:
     - host: backend.domain.com
