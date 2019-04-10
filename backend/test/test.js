@@ -21,8 +21,6 @@ describe('Movies collection', () => {
             {
               title: 'title',
               genres: 'genres',
-              creator: 'creator',
-              release: 'release',
               cast: 'cast',
               rate: 8,
               runtime: 100
@@ -30,8 +28,6 @@ describe('Movies collection', () => {
             {
               title: 'title1',
               genres: 'genres1',
-              creator: 'creator1',
-              release: 'release1',
               cast: 'cast1',
               rate: 10,
               runtime: 130
@@ -65,8 +61,6 @@ describe('Movies collection', () => {
         const data = {
           title: 'title',
           genres: 'genres',
-          creator: 'creator',
-          release: 'release',
           cast: 'cast',
           rate: 8,
           runtime: 100
@@ -94,8 +88,6 @@ describe('Movies collection', () => {
         const data = {
           title: 'title',
           genres: 'genres',
-          creator: 'creator',
-          release: 'release',
           cast: 'cast',
           rate: 8,
           runtime: 100
@@ -116,8 +108,6 @@ describe('Movies collection', () => {
         const data = {
           title: 'title3',
           genres: 'genres3',
-          creator: 'creator3',
-          release: 'release3',
           cast: 'cast3',
           rate: 8,
           runtime: 100
@@ -138,8 +128,6 @@ describe('Movies collection', () => {
         const data = {
           title: 'title3',
           genres: 'genres3',
-          creator: 'creator3',
-          release: 'release3',
           cast: 'cast3',
           rate: 8,
           runtime: 100

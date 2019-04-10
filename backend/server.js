@@ -38,18 +38,27 @@ MongoClient.connect(MONGO_CONNECTION, function (err, db) {
     });
 
     app.post('/movies', (req, res) => {
+        const id = new ObjectId();
         const data = {
+            _id: id,
             title: req.body.title,
             genres: req.body.genres,
-            creator: req.body.creator,
-            release: req.body.release,
             cast: req.body.cast,
             rate: req.body.rate,
             runtime: req.body.runtime
         };
 
         model.Movies(db).add(data)
-            .then(result => res.send(result))
+            .then(r => {
+                const resultWithData = {
+                    ...r,
+                    result: {
+                        ...r.result,
+                        data
+                    }
+                }
+                res.send(resultWithData);
+            })
             .catch(err => console.log(err));
     });
 
@@ -59,8 +68,6 @@ MongoClient.connect(MONGO_CONNECTION, function (err, db) {
         const data = {
             title: req.body.title,
             genres: req.body.genres,
-            creator: req.body.creator,
-            release: req.body.release,
             cast: req.body.cast,
             rate: req.body.rate,
             runtime: req.body.runtime
