@@ -1,0 +1,8 @@
+apiVersion: v1
+description: NodeJS app
+name: backend
+version: 0.1.0
+icon: https://png.icons8.com/workspace/win8/1600
+maintainers:
+  - name: Katarzyna Dusza
+    email: katarzyna.dusza@sap.com

@@ -1,0 +1,51 @@
+ingress:
+  enabled: true
+
+backend:
+  replicaCount: 1
+  image:
+    pullPolicy: Never
+    repository: backend
+    tag: v1
+    #pullPolicy: IfNotPresent
+    #repository: kdusza/backend-nodejs-express
+    #tag: latest
+  service:
+    type: NodePort
+    externalPort: 4000
+    internalPort: 4000
+  ingress:
+    enabled: true
+    fullName: backend
+    hosts:
+      - backend.domain.com
+
+frontend:
+  replicaCount: 1
+  image:
+    pullPolicy: Never
+    repository: frontend
+    tag: v1
+    #pullPolicy: IfNotPresent
+    #repository: kdusza/frontend-react
+    #tag: latest
+  service:
+    type: NodePort
+    externalPort: 80
+    internalPort: 80
+  ingress:
+    enabled: true
+    fullName: frontend
+    hosts:
+      - frontend.domain.com
+
+database:
+  replicaCount: 1
+  image:
+    pullPolicy: IfNotPresent
+    repository: mongo
+    tag: latest
+  service:
+    type: ClusterIP
+    externalPort: 27017
+    internalPort: 27017
