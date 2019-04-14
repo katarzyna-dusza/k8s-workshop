@@ -1,0 +1,157 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>reveal.js</title>
+
+		<link rel="stylesheet" href="css/reset.css">
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/black.css">
+		<link rel="stylesheet" href="css/moje.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/monokai.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section>
+					<img data-src="pirate.png" class="img"/>
+					<div class="text text-main">
+						<div>How to become a pirate?</div>
+						<div class="text-main--small">by Katarzyna Dusza</div>
+					</div>
+				</section>
+				<section data-background-color="#fff">
+					<img class="img k8s cluster" data-src="https://d33wubrfki0l68.cloudfront.net/99d9808dcbf2880a996ed50d308a186b5900cec9/40b94/docs/tutorials/kubernetes-basics/public/images/module_01_cluster.svg" />
+					<div class="text">
+						<div class="title">K8s in a nutshell</div>
+						<div class="content">
+							<ul>
+								<li>cluster</li>
+								<li>master</li>
+								<li>nodes</li>
+								<li>kubelet</li>
+						</div>
+					</div>
+					<div class="tip">
+						Masters manage the cluster and the nodes are used to host the running applications.
+					<div>
+				</section>
+				<section data-background-color="#fff">
+					<img class="img k8s" data-src="https://media.giphy.com/media/3og0IAQG2BtR13joe4/giphy-downsized-large.gif" />
+					<div class="text">
+						<div class="title">What will we work today with?</div>
+						<div class="content">
+							<ul>
+								<li>kubectl</li>
+								<li>k8s objects</li>
+						</div>
+					</div>
+				</section>
+				<section>
+					<div class="text">
+						obrazek jak to wyglada
+						<div class="title">Pod</div>
+						<div class="content">
+							co to
+						</div>
+						<div>
+							eval $(minikube docker-env)
+							docker build -t backend:v1 .
+							kc apply -f backend-deployment.yaml
+						</div>
+					</div>
+				</section>
+				<section>
+					<div class="text">
+						obrazek jak to wyglada
+						<div class="title">Replca set</div>
+						<div class="content">
+							co to
+						</div>
+					</div>
+				</section>
+				<section>
+					obrazek
+					<div class="text">
+						<div class="title">Deployment / (vs Replication Controller)</div>
+						<div class="content">
+							co to / yaml
+						</div>
+					</div>
+				</section>
+				<section>
+					<div class="text">
+						obrazek jak to wyglada
+						<div class="title">Serwis</div>
+						<div class="content">
+							co to / yaml
+						</div>
+					</div>
+				</section>
+				<section>
+					<div class="text">
+						obrazek
+						<div class="title">ingress</div>
+						<div class="content">
+							co to / yaml
+						</div>
+					</div>
+				</section>
+				<section>
+					<img class="img" data-src="https://media.giphy.com/media/26gJy7H0Ahx1kyM5W/giphy.gif" />
+					<div class="text">
+						<div class="text text-main">
+							<div>kubernetes in Action! rest of the apps (frontend, database as start, pokaz backend)</div>
+						</div>
+					</div>
+				</section>
+				<section>
+					<div class="text">
+						<div class="text text-main">
+							<div>Co to helm</div>
+						</div>
+					</div>
+				</section>
+				<section>
+					<img class="img" data-src="https://media.giphy.com/media/25Fd0NooYZjZrGnVcN/giphy.gif" />
+					<div class="text">
+						<div class="text text-main">
+							<div>helm in Action!</div>
+						</div>
+					</div>
+				</section>
+			</div>
+		</div>
+
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+				hash: true,
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true }
+				]
+			});
+		</script>
+	</body>
+</html>
