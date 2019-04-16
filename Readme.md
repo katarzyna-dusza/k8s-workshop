@@ -21,9 +21,64 @@ This repo contains exercises, which will help you start working with Kubernetes 
 
 
 
-##Branches (steps/bites)
+Check the tools:
 
-The repository has 4 branches, called bites. Each of them provides some improvements, i.e deployments have some additional annotations. To get the most out of it, go through all the branches (bites) in a right order (`bite1 -> bite2 -> bite3 -> bite4`).
+```bash
+# --- check docker: running containers ---
+docker ps 
+
+# output:
+CONTAINER ID	IMAGE	COMMAND		CREATED		STATUS		PORTS		NAMES
+
+# --- check minikube: version & run minikube ---
+minikube -v
+minikube start
+kubectl get all
+
+# output:
+There is a newer version of minikube available (v1.0.0).  Download it here:
+https://github.com/kubernetes/minikube/releases/tag/v1.0.0
+
+To disable this notification, run the following:
+minikube config set WantUpdateNotification false
+😄  minikube v0.35.0 on darwin (amd64)
+🔥  Creating virtualbox VM (CPUs=2, Memory=2048MB, Disk=20000MB) ...
+💿  Downloading Minikube ISO ...
+ 184.42 MB / 184.42 MB [============================================] 100.00% 0s
+📶  "minikube" IP address is 192.168.99.100
+🐳  Configuring Docker as the container runtime ...
+✨  Preparing Kubernetes environment ...
+💾  Downloading kubelet v1.13.4
+💾  Downloading kubeadm v1.13.4
+🚜  Pulling images required by Kubernetes v1.13.4 ...
+🚀  Launching Kubernetes v1.13.4 using kubeadm ...
+⌛  Waiting for pods: apiserver proxy etcd scheduler controller addon-manager dns
+🔑  Configuring cluster permissions ...
+🤔  Verifying component health .....
+💗  kubectl is now configured to use "minikube"
+🏄  Done! Thank you for using minikube!
+
+
+NAME				TYPE		CLUSTER-IP		EXTERNAL-IP		PORT(S)		AGE
+service/kubernetes  ClusterIP	x.x.x.x			<none>			443/TCP		2m
+
+# --- check helm: init & version ----
+helm init
+helm version
+
+# output:
+Client: &version.Version{SemVer:"v2.13.1", GitCommit:"618447cbf203d147601b4b9bd7f8c37a5d39fbb4", GitTreeState:"clean"}
+Server: &version.Version{SemVer:"v2.13.1", GitCommit:"618447cbf203d147601b4b9bd7f8c37a5d39fbb4", GitTreeState:"clean"}
+
+```
+
+
+
+
+
+## Branches (steps/bites)
+
+The repository has 4 branches, called bites. Each of them provides some improvements, i.e deployments have some additional annotations. To get the most out of it, go through all the branches (bites) in a right order (`bite1 -> bite2 -> bite3 -> bite4 -> bite5` ).
 
 
 
