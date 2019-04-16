@@ -178,7 +178,7 @@ Go to **frontend.domain.com** . Now, we should not have any CORS problem.
 
 ### Bite4
 
-The last bite is about **Helm**, which is a package manager for Kubernetes. In this small project, we have 3 deployments (database, backend, frontend), where each of them has 2 - 3 files. To have the whole application working as we suspect, we have to run `kubectl apply` ~8 times. 
+The _bite4_ is about **Helm**, which is a package manager for Kubernetes. In this small project, we have 3 deployments (database, backend, frontend), where each of them has 2 - 3 files. To have the whole application working as we suspect, we have to run `kubectl apply` ~8 times. 
 
 Let's imagine, that you have more than one app, more than one service, more than one database. Do you want to deploy them (every service, ingress, deployment, and so on) as you did it before? Helm comes for the rescue!
 
@@ -204,7 +204,11 @@ helm list
 
 
 
+### Bite5
 
+The last bite is an exercise for you. Inside the **exercise** directory, you will find a small service with Dockerfile. All you need to do is build the image and create yamls to deploy the app on k8s! 
+
+Good luck! 
 
 
 
