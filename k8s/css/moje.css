@@ -1,3 +1,16 @@
+.content-slide {
+  display: flex !important;
+}
+
+.side {
+  flex: 1;
+  margin: auto;
+}
+
+.bigger-image {
+  /* transform: scale(1.7, 1.7); */
+}
+
 .img {
   background: transparent !important;
   border: none !important;
@@ -11,12 +24,12 @@
 }
 
 .tip {
-  position: fixed;
-  font-size: 20px;
-  width: 50%;
+  position: absolute;
+  font-size: 15px;
+  width: 30%;
   background: lightgoldenrodyellow;
   padding: 10px;
-  bottom: -45%;
+  bottom: -20%;
   left: -5%;
   text-align: left;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
@@ -35,16 +48,9 @@ img {
 
 .title {
   font-weight: bold;
-  /* color: #488cef; */
+  color: #316de6;
   font-size: 60px;
-}
-
-.content {
-  margin-top: 50px;
-}
-
-.text-main {
-  margin-top: 20%;
+  margin-bottom: 20px;
 }
 
 .text-main--small {
