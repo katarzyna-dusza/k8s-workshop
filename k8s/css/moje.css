@@ -1,5 +1,13 @@
+section {
+  top: 0 !important;
+  height: 100% !important;
+}
+
 .content-slide {
   display: flex !important;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 .side {
@@ -17,6 +25,17 @@
   width: 50%;
   float: left;
   box-shadow: none !important;
+}
+
+.hljs {
+  color: #272822 !important;
+  font-size: 40px;
+  background: white !important;
+}
+
+.no-keyword > .hljs-keyword {
+  color: #272822 !important;
+  font-weight: normal;
 }
 
 .cluster {
