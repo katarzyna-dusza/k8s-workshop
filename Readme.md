@@ -2,10 +2,10 @@
 
 ## Overview
 
-This repo contains exercises, which will help you start working with Kubernetes (k8s). It consists of 2 directories:
+This repo contains exercises, which will help you start working with Kubernetes (k8s). It consists of:
 
-- `app` with the source code
-- `presentation` with the theory and tips, how to use k8s in your daily work.
+- the source code with yaml files
+- presentation with the theory and tips, how to use k8s in your daily work.
 
 
 
