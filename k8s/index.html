@@ -27,7 +27,7 @@
 		<div class="reveal">
 			<div class="slides">
 				<section>
-					<div class="content-slide">
+					<div class="content-slide main">
 						<div class="side">
 							<img class="bigger-image" data-src="pirate.png" class="img"/>
 						</div>
@@ -47,13 +47,12 @@
 						</div>
 						<div class="side">
 							<ul>
-								<li>k8s</li>
+								<li>k8s cluster</li>
 								<li>k8s objects</li>
 								<li>deploy with kubectl</li>
-								<li>scaling</li>
 								<li>deploy with helm</li>
-								<li>monitoring</li>
-								<li>excercise</li>
+								<li>scaling & rollback</li>
+								<li>exercise</li>
 							</ul>
 						</div>
 					</div>
@@ -64,24 +63,26 @@
 						<div class="side">
 							<img data-src="https://d33wubrfki0l68.cloudfront.net/99d9808dcbf2880a996ed50d308a186b5900cec9/40b94/docs/tutorials/kubernetes-basics/public/images/module_01_cluster.svg" />
 						</div>
-						<div class="side">
+						<div class="side" style="font-size: 25px;">
 							<ul>
-								<li>cluster</li>
-								<li>master</li>
-								<li>nodes</li>
-								<li>kubelet</li>
+								<li style="font-weight: bold">cluster</li>
+								<li style="font-weight: bold">master</li>
+									<ul>
+							      <li>exposes the k8s API</li>
+										<li>schedules the containers to run on nodes</li>
+										<li>scaling, scheduling, rolling out</li>
+							    </ul>
+								<li style="font-weight: bold">nodes</li>
+									<ul>
+										<li>runs applications </li>
+									</ul>
+								<li style="font-weight: bold">kubelet</li>
+									<ul>
+										<li>managing the Node, Pods and containers</li>
+										<li>communication</li>
+									</ul>
 							</ul>
 						</div>
-					</div>
-					<div class="tip">
-						Masters manage the cluster and the nodes are used to host the running applications.
-					<div>
-				</section>
-				<section data-background-color="#fff">
-					<div class="title">Command of the day</div>
-					<div class="content-slide">
-						<pre><code data-trim data-noescape class="no-keyword">kubectl action resource</code></pre>
-						<pre><code data-trim data-noescape class="no-keyword">kubectl get pods</code></pre>
 					</div>
 				</section>
 				<section data-background-color="#fff">
@@ -92,99 +93,142 @@
 						</div>
 						<div class="side">
 							<ul>
-								<li>cluster</li>
-								<li>master</li>
-								<li>nodes</li>
-								<li>kubelet</li>
+								<li>responsible for creating and updating instances of your application</li>
+							</ul>
+
+						</div>
+						<pre style="position: absolute; bottom: 0;"><code data-trim data-noescape class="no-keyword" style="font-size: 20px !important;">kubectl run name --image=image-name --port=80</code></pre>
+					</div>
+				</section>
+				<section data-background-color="#fff">
+					<div class="title">Pod</div>
+					<div class="content-slide">
+						<div class="side">
+							<img data-src="https://d33wubrfki0l68.cloudfront.net/5cb72d407cbe2755e581b6de757e0d81760d5b86/a9df9/docs/tutorials/kubernetes-basics/public/images/module_03_nodes.svg" />
+						</div>
+						<div class="side">
+							<ul>
+								<li>(can be) created by Deployment</li>
+								<li>runs on private, isolated network</li>
+								<li>is visible from other pods/services</li>
+								<li>host app instance (one Pod can have more than 1 application containers)</li>
 							</ul>
 						</div>
 					</div>
-					<div class="tip">
-						Masters manage the cluster and the nodes are used to host the running applications.
-					<div>
 				</section>
-				<section>
-					<div class="text">
-						obrazek jak to wyglada
-						<div class="title">Pod</div>
-						<div class="content">
-							co to
+				<section data-background-color="#fff">
+					<div class="title">ReplicaSet</div>
+					<div class="content-slide">
+						<div class="side">
+							<img data-src="https://media3.giphy.com/media/69qtLEDNlRY75CPHb9/200w.gif?cid=5a38a5a25cb753ae6264324132bd7f87" />
 						</div>
-						<div>
-							eval $(minikube docker-env)
-							docker build -t backend:v1 .
-							kc apply -f backend-deployment.yaml
+						<div class="side">
+							<ul>
+								<li>maintains stable set of replica Pods running at any given time</li>
+								<li>created by Deployment (replicas property)</li>
+							</ul>
 						</div>
 					</div>
 				</section>
-				<section>
-					<div class="text">
-						obrazek jak to wyglada
-						<div class="title">Replca set</div>
-						<div class="content">
-							co to
+				<section data-background-color="#fff">
+					<div class="title">Service</div>
+					<div class="content-slide">
+						<div class="side">
+							<img data-src="https://d33wubrfki0l68.cloudfront.net/b964c59cdc1979dd4e1904c25f43745564ef6bee/f3351/docs/tutorials/kubernetes-basics/public/images/module_04_labels.svg" />
+						</div>
+						<div class="side">
+							<ul>
+								<li>defines policy by which to access the Pods</li>
+								<li>matches a set of Pods using labels and selectors (properties)</li>
+								<li>4 types</li>
+							</ul>
+						</div>
+					</div>
+					<pre style="position: absolute; bottom: 0;"><code data-trim data-noescape class="no-keyword" style="font-size: 20px !important;">kubectl expose deployment/name --type="Type" --port=80</code></pre>
+				</section>
+				<section data-background-color="#fff">
+					<div class="title">Ingress</div>
+					<div class="content-slide">
+						<div class="side">
+							<img data-src="https://media1.giphy.com/media/xTiTnGQG98hLhmIN4A/200w.gif?cid=5a38a5a25cb658c1346967346b65de77" />
+						</div>
+						<div class="side">
+							<ul>
+								<li>manages external access to the services in the cluster</li>
+								<li>provides load balancing, SSL termination, ...</li>
+							</ul>
 						</div>
 					</div>
 				</section>
-				<section>
-					obrazek
-					<div class="text">
-						<div class="title">Deployment / (vs Replication Controller)</div>
-						<div class="content">
-							co to / yaml
+				<section data-background-color="#fff">
+					<div class="title">Command of the day</div>
+					<div class="content-slide">
+						<pre style="top: 40%; position: absolute; transform: translateY(-50%);"><code data-trim data-noescape class="no-keyword">kubectl &lt;action&gt; &lt;resource&gt;</code></pre>
+						<pre style="top: 50%; position: absolute; transform: translateY(-50%);"><code data-trim data-noescape class="no-keyword">kubectl get pods</code></pre>
+						<pre style="top: 60%; position: absolute; transform: translateY(-50%);"><code data-trim data-noescape class="no-keyword">rc po svc no ev ing deploy</code></pre>
+					</div>
+				</section>
+				<section data-background-color="#fff">
+					<div class="title">k8s in Action!</div>
+					<div class="content-slide">
+						<div class="side">
+							<img data-src="https://media.giphy.com/media/26gJy7H0Ahx1kyM5W/giphy.gif" />
+						</div>
+						<div class="side">
+							<pre style="top: 40%; width: 50% !important; position: absolute; transform: translateY(-50%);"><code data-trim data-noescape class="no-keyword" style="font-size: 15px;">eval $(minikube docker-env)</code></pre>
+							<pre style="top: 50%; width: 50% !important; position: absolute; transform: translateY(-50%);"><code data-trim data-noescape class="no-keyword" style="font-size: 15px;">docker build -t image-name:v1 .</code></pre>
+							<pre style="top: 60%; width: 50% !important; position: absolute; transform: translateY(-50%);"><code data-trim data-noescape class="no-keyword" style="font-size: 15px;">kubectl apply -f yaml-file.yaml</code></pre>
 						</div>
 					</div>
 				</section>
-				<section>
-					<div class="text">
-						obrazek jak to wyglada
-						<div class="title">Serwis</div>
-						<div class="content">
-							co to / yaml
+				<section data-background-color="#fff">
+					<div class="title">Helm</div>
+					<div class="content-slide">
+						<div class="side">
+							<img data-src="https://media.giphy.com/media/25Fd0NooYZjZrGnVcN/giphy.gif" />
+						</div>
+						<div class="side">
+							<pre style="top: 40%; width: 50% !important; position: absolute; transform: translateY(-50%);"><code data-trim data-noescape class="no-keyword" style="font-size: 15px;">helm list</code></pre>
+							<pre style="top: 50%; width: 50% !important; position: absolute; transform: translateY(-50%);"><code data-trim data-noescape class="no-keyword" style="font-size: 15px;">helm install package</code></pre>
+							<pre style="top: 60%; width: 50% !important; position: absolute; transform: translateY(-50%);"><code data-trim data-noescape class="no-keyword" style="font-size: 15px;">helm delete --purge release-name</code></pre>
 						</div>
 					</div>
 				</section>
-				<section>
-					<div class="text">
-						obrazek
-						<div class="title">ingress</div>
-						<div class="content">
-							co to / yaml
+				<section data-background-color="#fff">
+					<div class="title">Zalando</div>
+					<div class="content-slide">
+						<div class="side">
+							<img data-src="https://www.tecnobitcoin.es/wp-content/uploads/2018/10/zalando.jpg" />
 						</div>
-					</div>
-				</section>
-				<section>
-					<img class="img" data-src="https://media.giphy.com/media/26gJy7H0Ahx1kyM5W/giphy.gif" />
-					<div class="text">
-						<div class="text text-main">
-							<div>kubernetes in Action! rest of the apps (frontend, database as start, pokaz backend)</div>
+						<div class="side">
+							<ul>
+								<li>monitoring</li>
+								<li>Ingress</li>
+							</ul>
 						</div>
-					</div>
 				</section>
-				<section>
-					<div class="text">
-						<div class="text text-main">
-							<div>Co to helm</div>
-						</div>
-					</div>
-				</section>
-				<section>
-					<img class="img" data-src="https://media.giphy.com/media/25Fd0NooYZjZrGnVcN/giphy.gif" />
-					<div class="text">
-						<div class="text text-main">
-							<div>helm in Action!</div>
-						</div>
-					</div>
-				</section>
-				<section>
+				<section data-background-color="#fff">
 					<div class="title">Resources / useful links</div>
-					<ul>
-						<li>https://kubernetes.io/docs/home/</li>
-						<li>https://kubernetes.io/docs/tutorials/</li>
-						<li>https://www.katacoda.com/courses/kubernetes</li>
-						<li>https://kubernetes.io/docs/reference/kubectl/cheatsheet/</li>
-						<li>nice explanation service</li>
-					</ul>
+					<div class="content-slide">
+						<ul>
+							<li>https://kubernetes.io/docs/home/</li>
+							<li>https://kubernetes.io/docs/tutorials/</li>
+							<li>https://kubernetes.io/docs/reference/kubectl/cheatsheet/</li>
+							<li>https://www.katacoda.com/courses/kubernetes</li>
+							<li>https://medium.com/google-cloud/kubernetes-nodeport-vs-loadbalancer-vs-ingress-when-should-i-use-what-922f010849e0</li>
+						</ul>
+				</section>
+				<section>
+					<div class="content-slide main">
+						<div class="side">
+							<img class="bigger-image" data-src="pirate.png" class="img"/>
+						</div>
+						<div class="side">
+							<div class="text-main">
+								<div>Thank you!</div>
+							</div>
+						</div>
+					</div>
 				</section>
 			</div>
 		</div>
