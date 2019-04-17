@@ -2,14 +2,14 @@
 
 ## Overview
 
-This repo contains exercises, which will help you start working with Kubernetes (k8s). It consists of 2 directories:
+This repo contains exercises, which will help you start working with Kubernetes (k8s). It consists of:
 
-- `app` with the source code
-- `presentation` with the theory and tips, how to use k8s in your daily work.
+- the source code with yaml files
+- presentation with the theory and tips, how to use k8s in your daily work.
 
 
 
-## Prerequisities
+## Prerequisites
 
 - [Docker](<https://docs.docker.com/>)
 - [Minikube](<https://kubernetes.io/docs/tasks/tools/install-minikube/>)
@@ -110,9 +110,9 @@ docker build -t backend:v1
 
 ### Bite1
 
-In the first bite, we will deploy database and backend. 
+In the first bite, we will deploy the database and backend. 
 
-Run this commands to create your first _deployments, services and ingress_:
+Run these commands to create your first _deployments, services, and ingress_:
 
 ```bash
 kubectl apply -f database/deployment/database-deployment.yaml
@@ -148,9 +148,9 @@ Go to minikube [dashboard](<http://127.0.0.1:52686/api/v1/namespaces/kube-system
 
 ##### Proof:
 
-Go to **backend.domain.com**. Under main root (`/`), you should see: _"backend works"_. 
+Go to **backend.domain.com**. Under the main root (`/`), you should see: _"backend works"_. 
 
-If you are familiar with MongoDB, and want to add some data to the running mongo container, go to **Play with Mongo** in Advanced.md file.
+If you are familiar with MongoDB and want to add some data to the running mongo container, go to **Play with Mongo** in Advanced.md file.
 
 
 
@@ -164,7 +164,7 @@ cd frontend
 docker build -t frontend:v1
 ```
 
-This docker images can take some time, since `npm install` is running inside. If you want to save your time in the future (you will build the image couple of times), replace the Dockerfile with the following one: 
+This docker images can take some time since `npm install` is running inside. If you want to save your time in the future (you will build the image a couple of times), replace the Dockerfile with the following one: 
 
 ```dockerfile
 FROM nginx
@@ -211,7 +211,7 @@ Go to **frontend.domain.com** . Now, we should be able to open the frontend app 
 
 ### Bite3
 
-We have 2 options to fix the issue with CORS and allow the frontend app fetching the data from the backend:
+We have 2 options to fix the issue with CORS and allow the frontend app to fetch the data from the backend:
 
 - we can install [cors](<https://expressjs.com/en/resources/middleware/cors.html>) library and use it in the `server.js` file, in the backend,
 - or, we can put the [annotation](<https://imti.co/kubernetes-ingress-nginx-cors/>) in the backend ingress, which will turn on the CORS for us. In the _bite3_, we will go with the second approach.
