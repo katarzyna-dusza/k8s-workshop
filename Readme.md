@@ -9,7 +9,7 @@ This repo contains exercises, which will help you start working with Kubernetes 
 
 
 
-## Prerequisities
+## Prerequisites
 
 - [Docker](<https://docs.docker.com/>)
 - [Minikube](<https://kubernetes.io/docs/tasks/tools/install-minikube/>)
