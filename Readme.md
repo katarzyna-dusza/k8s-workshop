@@ -96,6 +96,9 @@ eval $(minikube docker-env)
 # enable ingress
 minikube addons enable ingress
 
+# then check 
+kc get po -n kube-system
+
 # build backend docker image
 cd backend
 docker build -t backend:v1
