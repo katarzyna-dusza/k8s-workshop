@@ -84,6 +84,14 @@
 							</ul>
 						</div>
 					</div>
+					<aside class="notes">
+						Master is a kind of orchestrator, which exposes the k8s API.
+						Everytime, when we are deploying the apps, we are telling something like: “Hey master! Start the app container for me, please! Here is the link (imgage url), where you can find the app”.
+						And then master schedules the containers to run on the nodes.
+						So, shortly, master ....
+						Node has some tools like docker, to handle the container operations like pulling the image, running app and so on.
+						In minikube, we have only 1 node. On production, we should have at least 3 nodes.
+					</aside>
 				</section>
 				<section data-background-color="#fff">
 					<div class="title">Deployment</div>
@@ -99,6 +107,13 @@
 						</div>
 						<pre style="position: absolute; bottom: 0;"><code data-trim data-noescape class="no-keyword" style="font-size: 20px !important;">kubectl run name --image=image-name --port=80</code></pre>
 					</div>
+					<aside class="notes">
+						Going back to the previous slide and Node definition…
+						when we are creating the deployment by running this kubectl run, what is it behind that command?
+						SEARCHES -> TAKES INTO ACCOUNT available resource on EACH node -> SCHEDULES -> CONFIGURES
+						it takes into account the available resources on each Node
+						configures the cluster to reschedule the instance on a new Node when needed.
+					</aside>
 				</section>
 				<section data-background-color="#fff">
 					<div class="title">Pod</div>
@@ -110,11 +125,17 @@
 							<ul>
 								<li>(can be) created by Deployment</li>
 								<li>runs on private, isolated network</li>
-								<li>is visible from other pods/services</li>
 								<li>host app instance (one Pod can have more than 1 application containers)</li>
 							</ul>
 						</div>
 					</div>
+					<aside class="notes">
+						epresents a group of one or more application containers, and some shared resources.
+
+	Normally, when we prepare Deployment, it creates one Pod for one instance. But sometimes, we can run multiple containers in one Pod. One of that situations could be, when we want to start an “initial container”, which will make something for us, like prepare the configuration or whatever and then, when it do his job, it’s going to be killed and the normal instance starts up using the configuration or environment prepared by the previous container.
+
+	Or… sometimes, creating multiple containers is used for implement a side-car, which will split the traffic for example to 50/50 or also do some additional things.
+					</aside>
 				</section>
 				<section data-background-color="#fff">
 					<div class="title">ReplicaSet</div>
@@ -129,12 +150,16 @@
 							</ul>
 						</div>
 					</div>
+					<aside class="notes">
+						ReplicaSet is created by Deployment too. Similar to Pod, it can be also created directly by us, but we should not do that unless we have a good reason for that. ReplicaSet is responsible for keeping stable set of replica Pods running at any given time. It guarantees that we have always a specified number of identical Pods.
+					</aside>
 				</section>
 				<section data-background-color="#fff">
 					<div class="title">Service</div>
 					<div class="content-slide">
 						<div class="side">
-							<img data-src="https://d33wubrfki0l68.cloudfront.net/b964c59cdc1979dd4e1904c25f43745564ef6bee/f3351/docs/tutorials/kubernetes-basics/public/images/module_04_labels.svg" />
+							<img style="width: 50%; float: left;" data-src="https://d33wubrfki0l68.cloudfront.net/cc38b0f3c0fd94e66495e3a4198f2096cdecd3d5/ace10/docs/tutorials/kubernetes-basics/public/images/module_04_services.svg" />
+							<img style="width: 50%; float: right;" data-src="https://d33wubrfki0l68.cloudfront.net/b964c59cdc1979dd4e1904c25f43745564ef6bee/f3351/docs/tutorials/kubernetes-basics/public/images/module_04_labels.svg" />
 						</div>
 						<div class="side">
 							<ul>
@@ -145,12 +170,21 @@
 						</div>
 					</div>
 					<pre style="position: absolute; bottom: 0;"><code data-trim data-noescape class="no-keyword" style="font-size: 20px !important;">kubectl expose deployment/name --type="Type" --port=80</code></pre>
+					<aside class="notes">
+						It’s another k8s object. It defines the policy by which to access the Pods. Allow our apps to receive the traffic, because I mentioned before, Pods, which have running containers inside, are not exposed outside the cluster.
+
+Service has 4 types:
+ClusterIP - (default). Exposes the service on INTERNAL IP. So it’s reachable only inside the cluster.
+NodePort - Reachable outside the cluster: <node-ip>:<node-port>. But, we have to keep in mind that the PORT changes, unless, we specify the PORT in the yaml. We can use ports 30000–32767. Anyway, it’s not recommend using this method in production and most of the time we should let Kubernetes choose the port.
+LoadBalancer - we have a load balancer and assigned fixed, external IP to the service. The big downside is that each service you expose with a LoadBalancer will get its own IP address, and you have to pay for a LoadBalancer per exposed service, which can get expensive.
+ExternalName - exposes service using name. But it is not so common I guess.
+					</aside>
 				</section>
 				<section data-background-color="#fff">
 					<div class="title">Ingress</div>
 					<div class="content-slide">
 						<div class="side">
-							<img data-src="https://media1.giphy.com/media/xTiTnGQG98hLhmIN4A/200w.gif?cid=5a38a5a25cb658c1346967346b65de77" />
+							<img style="transform: scale(1.7, 1.7);" data-src="https://media1.giphy.com/media/xTiTnGQG98hLhmIN4A/200w.gif?cid=5a38a5a25cb658c1346967346b65de77" />
 						</div>
 						<div class="side">
 							<ul>
@@ -159,6 +193,13 @@
 							</ul>
 						</div>
 					</div>
+					<aside class="notes">
+						The last resource is Ingress. It sits in front of multiple services and act as a “smart router”.
+						Ingress is a simple proxy, which routes the traffic to the Services in the cluster. Potentially, we don’t have to use Ingresses, but using it brings some advantages like having SSL termination.
+
+						It's more configurable than Service (with even ExternalName). Because, it's a proxy, we can do there whatever we want. We can also turn on the cors there.
+						+ we have a paths /version/...., so we can redirect to the specific version
+					</aside>
 				</section>
 				<section data-background-color="#fff">
 					<div class="title">Command of the day</div>
@@ -167,6 +208,9 @@
 						<pre style="top: 50%; position: absolute; transform: translateY(-50%);"><code data-trim data-noescape class="no-keyword">kubectl get pods</code></pre>
 						<pre style="top: 60%; position: absolute; transform: translateY(-50%);"><code data-trim data-noescape class="no-keyword">rc po svc no ev ing deploy</code></pre>
 					</div>
+					<aside class="notes">
+						In k8s, we are going to use mostly this command, where the action represents a verb like create, delete for example and resource means a k8s object. So, as an example, we have kubectl get pods. Shortly, instead of pods, we can use po, instead of services - svc….
+					</aside>
 				</section>
 				<section data-background-color="#fff">
 					<div class="title">k8s in Action!</div>
@@ -180,6 +224,13 @@
 							<pre style="top: 60%; width: 50% !important; position: absolute; transform: translateY(-50%);"><code data-trim data-noescape class="no-keyword" style="font-size: 15px;">kubectl apply -f yaml-file.yaml</code></pre>
 						</div>
 					</div>
+					<aside class="notes">
+						Ok, so. Now, it’s time to deploy something…
+
+So, first of all, we have to run: eval $(minikube docker-env), to export some docker env variables. Thanks to that, our docker host url will point to the k8s one and everytime when we build a new docker image, it would be visible inside the minikube.
+
+Prepare your environment section (github)
+					</aside>
 				</section>
 				<section data-background-color="#fff">
 					<div class="title">Helm</div>
@@ -191,6 +242,20 @@
 							<pre style="top: 40%; width: 50% !important; position: absolute; transform: translateY(-50%);"><code data-trim data-noescape class="no-keyword" style="font-size: 15px;">helm list</code></pre>
 							<pre style="top: 50%; width: 50% !important; position: absolute; transform: translateY(-50%);"><code data-trim data-noescape class="no-keyword" style="font-size: 15px;">helm install package</code></pre>
 							<pre style="top: 60%; width: 50% !important; position: absolute; transform: translateY(-50%);"><code data-trim data-noescape class="no-keyword" style="font-size: 15px;">helm delete --purge release-name</code></pre>
+						</div>
+					</div>
+				</section>
+				<section data-background-color="#fff">
+					<div class="title">Scaling / Rollbacks</div>
+					<div class="content-slide">
+						<div class="side">
+							<img style="transform: scale(1.7, 1.7);" data-src="https://media3.giphy.com/media/26DMVBP5MLkooJV28/200w.gif?cid=5a38a5a25cb753ae6264324132bd7f87" />
+						</div>
+						<div class="side">
+							<pre style="top: 30%; width: 50% !important; position: absolute; transform: translateY(-50%);"><code data-trim data-noescape class="no-keyword" style="font-size: 15px;">kubectl scale --replicas=3 -f deployment-name.yaml</code></pre>
+							<pre style="top: 40%; width: 50% !important; position: absolute; transform: translateY(-50%);"><code data-trim data-noescape class="no-keyword" style="font-size: 15px;">kubectl set image deployments/name image-name:version</code></pre>
+							<pre style="top: 50%; width: 50% !important; position: absolute; transform: translateY(-50%);"><code data-trim data-noescape class="no-keyword" style="font-size: 15px;">kubectl rollout status deployments/name</code></pre>
+							<pre style="top: 60%; width: 50% !important; position: absolute; transform: translateY(-50%);"><code data-trim data-noescape class="no-keyword" style="font-size: 15px;">kubectl undo deployments/name</code></pre>
 						</div>
 					</div>
 				</section>
@@ -210,13 +275,19 @@
 				<section data-background-color="#fff">
 					<div class="title">Resources / useful links</div>
 					<div class="content-slide">
-						<ul>
-							<li>https://kubernetes.io/docs/home/</li>
-							<li>https://kubernetes.io/docs/tutorials/</li>
-							<li>https://kubernetes.io/docs/reference/kubectl/cheatsheet/</li>
-							<li>https://www.katacoda.com/courses/kubernetes</li>
-							<li>https://medium.com/google-cloud/kubernetes-nodeport-vs-loadbalancer-vs-ingress-when-should-i-use-what-922f010849e0</li>
-						</ul>
+						<div class="side">
+							<img style="transform: scale(1.7, 1.7);" data-src="https://media3.giphy.com/media/3oEduPlMkw4LZE7624/200w.gif?cid=5a38a5a25cb76ed25842694f552d048f" />
+						</div>
+						<div class="side">
+							<ul>
+								<li><a href="https://kubernetes.io/docs/home/">k8s documentation</a></li>
+								<li><a href="https://kubernetes.io/docs/tutorials/">k8s tutorials</a></li>
+								<li><a href="https://kubernetes.io/docs/reference/kubectl/cheatsheet/">command cheatsheet</a></li>
+								<li><a href="https://www.katacoda.com/courses/kubernetes">katacoda playgrounds</a></li>
+								<li><a href="https://medium.com/google-cloud/kubernetes-nodeport-vs-loadbalancer-vs-ingress-when-should-i-use-what-922f010849e0">Service Types</a></li>
+								<li><a href="https://imti.co/kubernetes-ingress-nginx-cors/">cors annotations</a></li>
+							</ul>
+						</div>
 				</section>
 				<section>
 					<div class="content-slide main">
