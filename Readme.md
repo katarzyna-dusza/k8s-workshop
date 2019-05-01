@@ -25,7 +25,7 @@ Check the tools:
 
 ```bash
 # --- check docker: running containers ---
-docker ps 
+docker ps
 
 # output:
 CONTAINER ID	IMAGE	COMMAND		CREATED		STATUS		PORTS		NAMES
@@ -96,12 +96,12 @@ eval $(minikube docker-env)
 # enable ingress
 minikube addons enable ingress
 
-# then check 
+# then check
 kc get po -n kube-system
 
 # build backend docker image
 cd backend
-docker build -t backend:v1
+docker build -t backend:v1 .
 
 # add this line to your /etc/hosts
 ...
@@ -113,7 +113,7 @@ docker build -t backend:v1
 
 ### Bite1
 
-In the first bite, we will deploy the database and backend. 
+In the first bite, we will deploy the database and backend.
 
 Run these commands to create your first _deployments, services, and ingress_:
 
@@ -151,7 +151,7 @@ Go to minikube [dashboard](<http://127.0.0.1:52686/api/v1/namespaces/kube-system
 
 ##### Proof:
 
-Go to **backend.domain.com**. Under the main root (`/`), you should see: _"backend works"_. 
+Go to **backend.domain.com**. Under the main root (`/`), you should see: _"backend works"_.
 
 If you are familiar with MongoDB and want to add some data to the running mongo container, go to **Play with Mongo** in Advanced.md file.
 
@@ -164,10 +164,10 @@ In the _bite2_, we will deploy frontend using similar commands as in the first b
 ```bash
 # build backend docker image
 cd frontend
-docker build -t frontend:v1
+docker build -t frontend:v1 .
 ```
 
-This docker images can take some time since `npm install` is running inside. If you want to save your time in the future (you will build the image a couple of times), replace the Dockerfile with the following one: 
+This docker images can take some time since `npm install` is running inside. If you want to save your time in the future (you will build the image a couple of times), replace the Dockerfile with the following one:
 
 ```dockerfile
 FROM nginx
@@ -193,7 +193,7 @@ npm install
 npm run build
 
 # build backend docker image
-docker build -t frontend:v1
+docker build -t frontend:v1 .
 ```
 
 At the end, deploy the frontend app:
@@ -230,13 +230,13 @@ kubectl apply -f backend/deployment/backend-ingress.yaml
 
 ##### Proof:
 
-Go to **frontend.domain.com** . Now, we should not have any CORS problem. 
+Go to **frontend.domain.com** . Now, we should not have any CORS problem.
 
 
 
 ### Bite4
 
-The _bite4_ is about **Helm**, which is a package manager for Kubernetes. In this small project, we have 3 deployments (database, backend, frontend), where each of them has 2 - 3 files. To have the whole application working as we suspect, we have to run `kubectl apply` ~8 times. 
+The _bite4_ is about **Helm**, which is a package manager for Kubernetes. In this small project, we have 3 deployments (database, backend, frontend), where each of them has 2 - 3 files. To have the whole application working as we suspect, we have to run `kubectl apply` ~8 times.
 
 Let's imagine, that you have more than one app, more than one service, more than one database. Do you want to deploy them (every service, ingress, deployment, and so on) as you did it before? Helm comes for the rescue!
 
@@ -244,7 +244,7 @@ Let's imagine, that you have more than one app, more than one service, more than
 # run tiller
 helm init
 
-# deploy everything at once 
+# deploy everything at once
 helm install helm-deployment
 ```
 
@@ -264,13 +264,6 @@ helm list
 
 ### Bite5
 
-The last bite is an exercise for you. Inside the **exercise** directory, you will find a small service with Dockerfile. All you need to do is build the image and create yamls to deploy the app on k8s! 
+The last bite is an exercise for you. Inside the **exercise** directory, you will find a small service with Dockerfile. All you need to do is build the image and create yamls to deploy the app on k8s!
 
-Good luck! 
-
-
-
-
-
-
-
+Good luck!
