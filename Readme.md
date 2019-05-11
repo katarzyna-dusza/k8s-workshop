@@ -78,7 +78,7 @@ Server: &version.Version{SemVer:"v2.13.1", GitCommit:"618447cbf203d147601b4b9bd7
 
 ## Branches (steps/bites)
 
-The repository has 4 branches, called bites. Each of them provides some improvements, i.e deployments have some additional annotations. To get the most out of it, go through all the branches (bites) in a right order (`bite1 -> bite2 -> bite3 -> bite4 -> bite5` ).
+The repository has 5 branches, called bites. Each of them provides some improvements, i.e deployments have some additional annotations. To get the most out of it, go through all the branches (bites) in a right order (`bite1 -> bite2 -> bite3 -> bite4 -> bite5` ).
 
 
 
