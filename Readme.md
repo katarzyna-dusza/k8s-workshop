@@ -135,10 +135,10 @@ kubectl apply -f backend/deployment/backend-ingress.yaml
 kubectl get all
 
 # display deployments/pods/services/ingresses deployed on k8s
-kubectl deployment # or kubectl deployments or kubectl deploy
-kubectl pod # or kubectl pods or kubectl po
-kubectl service # or kubectl services or kubectl svc
-kubecrl ingress # or kubectl ingresses or kubectl ing
+kubectl get deployment # or kubectl get deployments or kubectl get deploy
+kubectl get pod # or kubectl get pods or kubectl get po
+kubectl get service # or kubectl get services or kubectl get svc
+kubectl get ingress # or kubectl get ingresses or kubectl get ing
 ```
 
 
