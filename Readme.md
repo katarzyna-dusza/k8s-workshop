@@ -99,10 +99,6 @@ minikube addons enable ingress
 # then check
 kc get po -n kube-system
 
-# build backend docker image
-cd backend
-docker build -t backend:v1 .
-
 # add this line to your /etc/hosts
 ...
 192.168.99.100       backend.domain.com frontend.domain.com
@@ -118,6 +114,11 @@ In the first bite, we will deploy the database and backend.
 Run these commands to create your first _deployments, services, and ingress_:
 
 ```bash
+# build backend docker image
+cd backend
+docker build -t backend:v1 .
+
+# deploy
 kubectl apply -f database/deployment/database-deployment.yaml
 kubectl apply -f database/deployment/service-deployment.yaml
 
